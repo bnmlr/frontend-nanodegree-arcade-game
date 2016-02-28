@@ -38,14 +38,22 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function() {
-    
+Player.prototype.handleInput = function(direction) {
+   if (direction == 'up') {
+   		this.y = this.y - 85;
+   	} else if (direction == 'down') {
+   		this.y = this.y + 85;
+   	} else if (direction == 'left') {
+   		this.x = this.x - 100;
+   	} else if (direction == 'right') {
+   		this.x = this.x + 100;
+   	}
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var player = new Player(50, 50);
+var player = new Player(200, 400);
 //player.render();
 
 
