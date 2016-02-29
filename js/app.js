@@ -54,15 +54,19 @@ Player.prototype.handleInput = function(direction) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var player = new Player(200, 400);
-//player.render();
 
 
-//need to figure out the right x and y coordinates for the 3 stone rows to assign right coords for the enemies?
-var enemy1 = new Enemy(0, 60);
-var enemy2 = new Enemy(0, 145);
-var enemy3 = new Enemy(0, 230);
+var yaxis = [60, 143, 226]; //possible y axes for enemies
 var allEnemies = [];
-allEnemies.push(enemy1, enemy2, enemy3);
+for (var i = 0; i < 3; i++) { 
+	var rand = yaxis[Math.floor(Math.random() * yaxis.length)]; //choosing a random y axis
+ 	allEnemies.push(new Enemy(-101, rand)); 
+}
+// var enemy1 = new Enemy(-101, 60);
+// var enemy2 = new Enemy(-101, 143);
+// var enemy3 = new Enemy(-101, 226);
+// var allEnemies = [];
+// allEnemies.push(enemy1, enemy2, enemy3);
 
 
 // This listens for key presses and sends the keys to your
