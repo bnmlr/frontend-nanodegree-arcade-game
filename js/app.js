@@ -13,6 +13,12 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + this.speed * dt;
+    if (this.x > 505) {
+    	var enemyIndex = allEnemies.indexOf(this);
+    	allEnemies.splice(enemyIndex, 1);
+    	var rand = yaxis[Math.floor(Math.random() * yaxis.length)]; //choosing a random starting lane
+ 		allEnemies.push(new Enemy(-101, rand)); 
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -40,13 +46,13 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(direction) {
    if (direction == 'up') {
-   		this.y = this.y - 85;
+   		this.y = this.y - 83;
    	} else if (direction == 'down') {
-   		this.y = this.y + 85;
+   		this.y = this.y + 83;
    	} else if (direction == 'left') {
-   		this.x = this.x - 100;
+   		this.x = this.x - 101;
    	} else if (direction == 'right') {
-   		this.x = this.x + 100;
+   		this.x = this.x + 101;
    	}
 };
 
@@ -58,15 +64,13 @@ var player = new Player(200, 400);
 
 var yaxis = [60, 143, 226]; //possible y axes for enemies
 var allEnemies = [];
-for (var i = 0; i < 3; i++) { 
-	var rand = yaxis[Math.floor(Math.random() * yaxis.length)]; //choosing a random y axis
+
+
+while (allEnemies.length < 3) { 
+	var rand = yaxis[Math.floor(Math.random() * yaxis.length)]; //choosing a random starting lane
  	allEnemies.push(new Enemy(-101, rand)); 
-}
-// var enemy1 = new Enemy(-101, 60);
-// var enemy2 = new Enemy(-101, 143);
-// var enemy3 = new Enemy(-101, 226);
-// var allEnemies = [];
-// allEnemies.push(enemy1, enemy2, enemy3);
+ };
+
 
 
 // This listens for key presses and sends the keys to your
