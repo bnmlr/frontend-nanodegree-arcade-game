@@ -37,7 +37,20 @@ var Player = function(x, y) {
 };
 
 Player.prototype.update = function(dt) {
-
+	// if (this.x < allEnemies[1].x + allEnemies[1].width &&
+ // 		this.x + this.width > allEnemies[1].x &&
+ // 		this.y < allEnemies[1].y + allEnemies[1].height &&
+ // 		this.height + this.y > allEnemies[1].y) {
+ //    // collision detected!
+	// console.log("Hit");
+	if (this.x < 0 || this.x > 404) {
+		this.x = 202;
+		this.y = 400;
+	}
+	if (this.y < 68 || this.y > 400) {
+		this.x = 202;
+		this.y = 400;
+	}
 };
 
 Player.prototype.render = function() {
@@ -59,7 +72,7 @@ Player.prototype.handleInput = function(direction) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var player = new Player(200, 400);
+var player = new Player(202, 400);
 
 
 var yaxis = [60, 143, 226]; //possible y axes for enemies
