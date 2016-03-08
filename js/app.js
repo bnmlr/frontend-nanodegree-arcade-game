@@ -19,6 +19,14 @@ Enemy.prototype.update = function(dt) {
     	var rand = yaxis[Math.floor(Math.random() * yaxis.length)]; //choosing a random starting lane
  		allEnemies.push(new Enemy(-101, rand)); 
     }
+    if (this.x < player.x + 75 &&
+ 		this.x + 75 > player.x &&
+ 		this.y < player.y + 83 &&
+ 		83 + this.y > player.y) 
+ 		{
+		player.x = 202;
+		player.y = 392;
+	}
 };
 
 // Draw the enemy on the screen, required method for game
@@ -37,22 +45,15 @@ var Player = function(x, y) {
 };
 
 Player.prototype.update = function(dt) {
-	if (this.x < (allEnemies[1].x || allEnemies[2].x || allEnemies[3].x) + 101 &&
- 		this.x + 101 > (allEnemies[1].x || allEnemies[2].x || allEnemies[3].x) &&
- 		this.y < (allEnemies[1].y || allEnemies[2].y || allEnemies[3].y) + 83 &&
- 		83 + this.y > (allEnemies[1].y || allEnemies[2].y || allEnemies[3].y)) {
-    // collision detected!
-//not working correctly. maybe because bugs' position in array changes each time a new bug is created?
-	console.log("Hit");
-	}
-	if (this.x < 0 || this.x > 404) {
-		this.x = 202;
-		this.y = 400;
-	}
-	if (this.y < 60 || this.y > 392) {
+	// if (this.x < 0 || this.x > 404) {
+	// 	this.x = 202;
+	// 	this.y = 392;
+	//}
+	if (this.y < 60) {
+		console.log('You Win');
 		this.x = 202;
 		this.y = 392;
-	}
+	};
 
 };
 
@@ -63,11 +64,14 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(direction) {
    if (direction == 'up') {
    		this.y = this.y - 83;
-   	} else if (direction == 'down') {
+   	} else if (direction == 'down' &&
+   				this.y < 392) {
    		this.y = this.y + 83;
-   	} else if (direction == 'left') {
+   	} else if (direction == 'left' &&
+   			this.x > 0) {
    		this.x = this.x - 101;
-   	} else if (direction == 'right') {
+   	} else if (direction == 'right' &&
+   			this.x < 404) {
    		this.x = this.x + 101;
    	}
 };
