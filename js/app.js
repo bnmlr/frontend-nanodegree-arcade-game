@@ -1,4 +1,4 @@
-// Enemies our player must avoid
+// Enemies class
 var Enemy = function(x, y) {
     this.x = x;
     this.y = y;
@@ -6,19 +6,21 @@ var Enemy = function(x, y) {
     this.sprite = 'images/enemy-bug.png';
 };
 
-// Update the enemy's position, required method for game
+// Method updates enemy's position and detects collisions
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
+    // Multiplies speed by the dt parameter
+    // tol ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + this.speed * dt;
+    //Generates a new enemy every time one goes off the canvas
     if (this.x > 505) {
     	var enemyIndex = allEnemies.indexOf(this);
     	allEnemies.splice(enemyIndex, 1);
-    	var rand = yaxis[Math.floor(Math.random() * yaxis.length)]; //choosing a random starting lane
+    	var rand = yaxis[Math.floor(Math.random() * yaxis.length)]; 
  		allEnemies.push(new Enemy(-101, rand)); 
     }
+    //Collision detection; sends player back to start on collision
     if (this.x < player.x + 75 &&
  		this.x + 75 > player.x &&
  		this.y < player.y + 83 &&
@@ -29,26 +31,21 @@ Enemy.prototype.update = function(dt) {
 	}
 };
 
-// Draw the enemy on the screen, required method for game
+// Draws the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player class
 var Player = function(x, y) {
 	this.x = x;
     this.y = y;
 	this.sprite = 'images/char-boy.png'
 };
 
-Player.prototype.update = function(dt) {
-	// if (this.x < 0 || this.x > 404) {
-	// 	this.x = 202;
-	// 	this.y = 392;
-	//}
+//Method detects player's location to determine win
+Player.prototype.update = function() {
 	if (this.y < 60) {
 		console.log('You Win');
 		this.x = 202;
@@ -57,10 +54,12 @@ Player.prototype.update = function(dt) {
 
 };
 
+//Method draws player
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+//Method handles keyboard input and moves player
 Player.prototype.handleInput = function(direction) {
    if (direction == 'up') {
    		this.y = this.y - 83;
@@ -76,16 +75,14 @@ Player.prototype.handleInput = function(direction) {
    	}
 };
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// Instantiate player objects
 var player = new Player(202, 392);
 
-
-var yaxis = [60, 143, 226]; //possible y axes for enemies
+//Possible y axes for enemies
+var yaxis = [60, 143, 226]; 
 var allEnemies = [];
 
-
+//Loop instantiates enemies and puts them into array
 while (allEnemies.length < 3) { 
 	var rand = yaxis[Math.floor(Math.random() * yaxis.length)]; //choosing a random starting lane
  	allEnemies.push(new Enemy(-101, rand)); 
@@ -94,7 +91,7 @@ while (allEnemies.length < 3) {
 
 
 // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
