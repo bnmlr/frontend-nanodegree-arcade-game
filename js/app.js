@@ -41,16 +41,15 @@ Enemy.prototype.render = function() {
 var Player = function(x, y) {
 	this.x = x;
     this.y = y;
-	this.sprite = 'images/char-boy.png'
+	this.sprite = 'images/char-boy.png';
 };
 
 //Method detects player's location to determine win
 Player.prototype.update = function() {
 	if (this.y < 60) {
-		console.log('You Win');
 		this.x = 202;
 		this.y = 392;
-	};
+	}
 
 };
 
@@ -79,16 +78,14 @@ Player.prototype.handleInput = function(direction) {
 var player = new Player(202, 392);
 
 //Possible y axes for enemies
-var yaxis = [60, 143, 226]; 
+var yaxis = [60, 143, 226];
 var allEnemies = [];
 
 //Loop instantiates enemies and puts them into array
 while (allEnemies.length < 3) { 
 	var rand = yaxis[Math.floor(Math.random() * yaxis.length)]; //choosing a random starting lane
- 	allEnemies.push(new Enemy(-101, rand)); 
- };
-
-
+ 	allEnemies.push(new Enemy(-101, rand));
+ }
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method.
