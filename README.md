@@ -1,6 +1,10 @@
-frontend-nanodegree-arcade-game
-===============================
+# Frogger Clone
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
+## How to Run
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+1. Download or clone the game files onto your computer
+2. Open index.html in a browser
+
+## How to Play
+
+Use the arrow keys to move the player to the water without being hit by a bug.
